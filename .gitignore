@@ -1,7 +1,7 @@
 blog/migrations/
 bbbytes/migrations/
 pages/migrations/
-blog/__pycache__/
+blogs/__pycache__/
 pages/__pycache__/
 bbbytes/__pycache__/
 ProductionFiles/
