@@ -4,6 +4,7 @@ pages/migrations/
 blog/__pycache__/
 pages/__pycache__/
 bbbytes/__pycache__/
+ProductionFiles/
 .env
 env/
 *.pyc
