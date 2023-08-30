@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en-US">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>
+		Bollywood Buzz || Sports Scoop || Inspirational Biographies || Pop Culture
+		|| Tech & Innovation || Health & Wellness || Travel Tales || Food &
+		Flavors
+	</title>
+	<meta name="description"
+		content="BakBakBytes - Explore a diverse range of trending topics on BakbakBytes. From Bollywood buzz to sports controversies, biographies, tech innovations, and more. Stay informed and entertained with our captivating articles" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link rel="shortcut icon" type="image/x-icon" href="{% static 'images/logo_square.jpeg' %}">
+
+	<!-- STYLES -->
+	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css" media="all">
+	<link rel="stylesheet" href="{% static 'css/all.min.css' %}" type="text/css" media="all">
+	<link rel="stylesheet" href="{% static 'css/slick.css' %}" type="text/css" media="all">
+	<link rel="stylesheet" href="{% static 'css/simple-line-icons.css' %}" type="text/css" media="all">
+	<link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css" media="all">
+
+</head>
+
+<body>
+
+<!-- site wrapper -->
+<div class="site-wrapper">
+
+	<div class="main-overlay"></div>
+
+	<!-- header -->
+	<header class="header-default">
+		<nav class="navbar navbar-expand-lg">
+			<div class="container-xl">
+				<!-- site logo -->
+				<a class="navbar-brand" href="#"><img src="{% static 'images/logo.png' %}" width="100%" alt="logo" /></a>
+
+				<div class="collapse navbar-collapse">
+					<!-- menus -->
+					<ul class="navbar-nav mr-auto">
+						<li class="nav-item dropdown active">
+							<a class="nav-link" href="#">Home</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{% url 'CategoryView' slug='trending' %}">Trending</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{% url 'CategoryView' slug='cinema' %}">Cinema</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{% url 'CategoryView' slug='lifestyle' %}">Lifestyle</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{% url 'CategoryView' slug='sports' %}">Sports</a>
+						</li>
+					</ul>
+				</div>
+
+				<!-- header right section -->
+				<div class="header-right">
+					<!-- social icons -->
+					<ul class="social-icons list-unstyled list-inline mb-0">
+						<li class="list-inline-item">
+							<a href="#"><i class="fab fa-facebook-f"></i></a>
+						</li>
+						<li class="list-inline-item">
+							<a href="#"><i class="fab fa-twitter"></i></a>
+						</li>
+						<li class="list-inline-item">
+							<a href="#"><i class="fab fa-instagram"></i></a>
+						</li>
+						<li class="list-inline-item">
+							<a href="#"><i class="fab fa-pinterest"></i></a>
+						</li>
+						<li class="list-inline-item">
+							<a href="#"><i class="fab fa-youtube"></i></a>
+						</li>
+					</ul>
+					<!-- header buttons -->
+					<div class="header-buttons">
+						<button class="search icon-button">
+							<i class="icon-magnifier"></i>
+						</button>
+						<button class="burger-menu icon-button">
+							<span class="burger-icon"></span>
+						</button>
+					</div>
+				</div>
+			</div>
+		</nav>
+	</header>
+
+	<!-- hero section -->
+	<section id="hero">
+
+		<div class="container-xl">
+
+			<div class="row gy-4">
+
+				<div class="col-lg-8">
+					
+					<!-- featured post large -->
+					<div class="post featured-post-lg">
+						<div class="details clearfix">
+							<a href="{% url 'CategoryView' slug=featured.category.slug %}" class="category-badge">{{featured.category.name}}</a>
+							<h2 class="post-title"><a href="{% url 'BlogDetailView' slug=featured.slug %}">{{featured.title}}</a></h2>
+							<ul class="meta list-inline mb-0">
+								<li class="list-inline-item"><a href="#">{{featured.author}}</a></li>
+								<li class="list-inline-item">{{featured.created}}</li>
+							</ul>
+						</div>
+						<a href="{% url 'BlogDetailView' slug=featured.slug %}">
+							<div class="thumb rounded">
+								<div class="inner data-bg-image" data-bg-image="{{featured.front_image.url}}"></div>
+							</div>
+						</a>
+					</div>
+
+				</div>
+
+				<div class="col-lg-4">
+
+					<!-- post tabs -->
+					<div class="post-tabs rounded bordered">
+						<!-- tab navs -->
+						<ul class="nav nav-tabs nav-pills nav-fill" id="postsTab" role="tablist">
+							<li class="nav-item" role="presentation"><button aria-controls="popular" aria-selected="true" class="nav-link active" data-bs-target="#popular" data-bs-toggle="tab" id="popular-tab" role="tab" type="button">Popular</button></li>
+							<li class="nav-item" role="presentation"><button aria-controls="recent" aria-selected="false" class="nav-link" data-bs-target="#recent" data-bs-toggle="tab" id="recent-tab" role="tab" type="button">Recent</button></li>
+						</ul>
+						<!-- tab contents -->
+						<div class="tab-content" id="postsTabContent">
+							<!-- loader -->
+							<div class="lds-dual-ring"></div>
+							<!-- popular posts -->
+							<div aria-labelledby="popular-tab" class="tab-pane fade show active" id="popular" role="tabpanel">
+								<!-- post -->
+								{% for popular in populars %}
+									<div class="post post-list-sm circle">
+										<div class="thumb circle">
+											<a href="{% url 'BlogDetailView' slug=popular.slug %}">
+												<div class="inner">
+													<img src="{{popular.front_image.url}}" alt="post-title" />
+												</div>
+											</a>
+										</div>
+										<div class="details clearfix">
+											<h6 class="post-title my-0"><a href="{% url 'BlogDetailView' slug=popular.slug %}">{{popular.short_title}}</a></h6>
+											<ul class="meta list-inline mt-1 mb-0">
+												<li class="list-inline-item">{{popular.created}}</li>
+											</ul>
+										</div>
+									</div>
+								{% endfor %}
+							</div>
+							<!-- recent posts -->
+							<div aria-labelledby="recent-tab" class="tab-pane fade" id="recent" role="tabpanel">
+								{% for recent in recents %}
+									<!-- post -->
+									<div class="post post-list-sm circle">
+										<div class="thumb circle">
+											<a href="{% url 'BlogDetailView' slug=recent.slug %}">
+												<div class="inner">
+													<img src="{{recent.front_image.url}}" alt="post-title" />
+												</div>
+											</a>
+										</div>
+										<div class="details clearfix">
+											<h6 class="post-title my-0"><a href="{% url 'BlogDetailView' slug=recent.slug %}">{{recent.short_title}}</a></h6>
+											<ul class="meta list-inline mt-1 mb-0">
+												<li class="list-inline-item">{{recent.created}}</li>
+											</ul>
+										</div>
+									</div>
+								{% endfor %}
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+
+	</section>
+
+	<!-- section main content -->
+	<section class="main-content">
+		<div class="container-xl">
+
+			<div class="row gy-4">
+
+				<div class="col-lg-8">
+
+					<!-- section header -->
+					<div class="section-header">
+						<h3 class="section-title">Trendings</h3>
+					</div>
+
+					<div class="padding-30 rounded bordered">
+						<div class="row gy-5">
+							<div class="col-sm-6">
+								<!-- post -->
+								{% with trendings|first as trending %}
+									<div class="post">
+										<div class="thumb rounded">
+											<a href="{% url 'CategoryView' slug=trending.category.slug %}" class="category-badge position-absolute">{{trending.category.name}}</a>
+											<span class="post-format">
+												<i class="icon-picture"></i>
+											</span>
+											<a href="{% url 'BlogDetailView' slug=trending.slug %}">
+												<div class="inner">
+													<img src="{{trending.front_image.url}}" alt="post-title" />
+												</div>
+											</a>
+										</div>
+										<ul class="meta list-inline mt-4 mb-0">
+											<li class="list-inline-item"><a href="#"><img src="{% static 'images/other/author-sm.png' %}" class="author" alt="author"/>Katen Doe</a></li>
+											<li class="list-inline-item">{{trending.created}}</li>
+										</ul>
+										<h5 class="post-title mb-3 mt-3"><a href="{% url 'BlogDetailView' slug=trending.slug %}">{{trending.short_title}}</a></h5>
+										<p class="excerpt mb-0">{{trending.description|truncatewords:18}}</p>
+									</div>
+								{% endwith %}
+							</div>
+							<div class="col-sm-6">
+								{% for trending in trendings|slice:"1:" %}
+									<!-- post -->
+									<div class="post post-list-sm square">
+										<div class="thumb rounded">
+											<a href="{% url 'BlogDetailView' slug=trending.slug %}">
+												<div class="inner">
+													<img src="{{trending.front_image.url}}" alt="post-title" />
+												</div>
+											</a>
+										</div>
+										<div class="details clearfix">
+											<h6 class="post-title my-0"><a href="{% url 'BlogDetailView' slug=trending.slug %}">{{trending.short_title}}</a></h6>
+											<ul class="meta list-inline mt-1 mb-0">
+												<li class="list-inline-item">{{trending.category.name}}</li>
+											</ul>
+										</div>
+									</div>
+								{% endfor %}
+							</div>
+						</div>
+					</div>
+
+					<div class="spacer" data-height="50"></div>
+					
+					<div class="section-header">
+						<h3 class="section-title">Controversies</h3>
+					</div>
+
+					<div class="padding-30 rounded bordered">
+						<div class="row gy-5">
+							<div class="col-sm-6">
+								<!-- post -->
+								{% with controversies|first as controversy %}
+									<div class="post">
+										<div class="thumb rounded">
+											<a href="{% url 'CategoryView' slug=controversy.category.slug %}" class="category-badge position-absolute">{{controversy.category.name}}</a>
+											<span class="post-format">
+												<i class="icon-picture"></i>
+											</span>
+											<a href="{% url 'BlogDetailView' slug=controversy.slug %}">
+												<div class="inner">
+													<img src="{{controversy.front_image.url}}" alt="post-title" />
+												</div>
+											</a>
+										</div>
+										<ul class="meta list-inline mt-4 mb-0">
+											<li class="list-inline-item"><a href="#"><img src="{% static 'images/other/author-sm.png' %}" class="author" alt="author"/>Katen Doe</a></li>
+											<li class="list-inline-item">{{controversy.created}}</li>
+										</ul>
+										<h5 class="post-title mb-3 mt-3"><a href="{% url 'BlogDetailView' slug=controversy.slug %}">{{controversy.short_title}}</a></h5>
+										<p class="excerpt mb-0">{{controversy.description|truncatewords:18}}</p>
+									</div>
+								{% endwith %}
+							</div>
+							<div class="col-sm-6">
+								{% for controversy in controversies|slice:"1:" %}
+									<!-- post -->
+									<div class="post post-list-sm square">
+										<div class="thumb rounded">
+											<a href="{% url 'BlogDetailView' slug=controversy.slug %}">
+												<div class="inner">
+													<img src="{{controversy.front_image.url}}" alt="post-title" />
+												</div>
+											</a>
+										</div>
+										<div class="details clearfix">
+											<h6 class="post-title my-0"><a href="{% url 'BlogDetailView' slug=controversy.slug %}">{{controversy.short_title}}</a></h6>
+											<ul class="meta list-inline mt-1 mb-0">
+												<li class="list-inline-item">{{controversy.category.name}}</li>
+											</ul>
+										</div>
+									</div>
+								{% endfor %}
+							</div>
+						</div>
+					</div>
+
+					<div class="spacer" data-height="50"></div>
+					
+					<div class="section-header">
+						<h3 class="section-title">Cinema</h3>
+					</div>
+
+					<div class="padding-30 rounded bordered">
+						<div class="row gy-5">
+							<div class="col-sm-6">
+								<!-- post -->
+								{% with cinemas|first as cinema %}
+									<div class="post">
+										<div class="thumb rounded">
+											<a href="{% url 'CategoryView' slug=cinema.category.slug %}" class="category-badge position-absolute">{{cinema.category.name}}</a>
+											<span class="post-format">
+												<i class="icon-picture"></i>
+											</span>
+											<a href="{% url 'BlogDetailView' slug=cinema.slug %}">
+												<div class="inner">
+													<img src="{{cinema.front_image.url}}" alt="post-title" />
+												</div>
+											</a>
+										</div>
+										<ul class="meta list-inline mt-4 mb-0">
+											<li class="list-inline-item"><a href="#"><img src="{% static 'images/other/author-sm.png' %}" class="author" alt="author"/>Katen Doe</a></li>
+											<li class="list-inline-item">{{cinema.created}}</li>
+										</ul>
+										<h5 class="post-title mb-3 mt-3"><a href="{% url 'BlogDetailView' slug=cinema.slug %}">{{cinema.short_title}}</a></h5>
+										<p class="excerpt mb-0">{{cinema.description|truncatewords:18}}</p>
+									</div>
+								{% endwith %}
+							</div>
+							<div class="col-sm-6">
+								{% for cinema in cinemas|slice:"1:" %}
+									<!-- post -->
+									<div class="post post-list-sm square">
+										<div class="thumb rounded">
+											<a href="{% url 'BlogDetailView' slug=cinema.slug %}">
+												<div class="inner">
+													<img src="{{cinema.front_image.url}}" alt="post-title" />
+												</div>
+											</a>
+										</div>
+										<div class="details clearfix">
+											<h6 class="post-title my-0"><a href="{% url 'BlogDetailView' slug=cinema.slug %}">{{cinema.short_title}}</a></h6>
+											<ul class="meta list-inline mt-1 mb-0">
+												<li class="list-inline-item">{{cinema.category.name}}</li>
+											</ul>
+										</div>
+									</div>
+								{% endfor %}
+							</div>
+						</div>
+					</div>
+
+					<div class="spacer" data-height="50"></div>
+					
+
+				</div>
+				<div class="col-lg-4">
+
+					<!-- sidebar -->
+					<div class="sidebar">
+
+						<!-- widget categories -->
+						<div class="widget rounded">
+							<div class="widget-header text-center">
+								<h3 class="widget-title">Explore Topics</h3>
+							</div>
+							<div class="widget-content">
+								<ul class="list">
+									<li><a href="{% url 'CategoryView' slug='lifestyle' %}">Lifestyle</a><!--<span>(5)</span>--></li>
+									<li><a href="{% url 'CategoryView' slug='fashion' %}">Fashion</a><!--<span>(4)</span>--></li>
+									<li><a href="{% url 'CategoryView' slug='trending' %}">Trending</a><!--<span>(7)</span>--></li>
+									<li><a href="{% url 'CategoryView' slug='cinema' %}">Cinema</a><!--<span>(3)</span>--></li>
+								</ul>
+							</div>
+							
+						</div>
+
+						<!-- widget newsletter -->
+						<div class="widget rounded">
+							<div class="widget-header text-center">
+								<h3 class="widget-title">Newsletter</h3>
+							</div>
+							<div class="widget-content">
+								<span class="newsletter-headline text-center mb-3">Join 6K+ subscribers!</span>
+								<form method="POST" action="{% url 'NewsLetterView' %}">
+									{% csrf_token %}
+									<div class="mb-2">
+										<input class="form-control w-100 text-center" placeholder="Email address…" type="email" name="email">
+									</div>
+									<button class="btn btn-default btn-full" type="submit">Sign Up</button>
+								</form>
+								<span class="newsletter-privacy text-center mt-3">By signing up, you agree to our <a href="{% url 'PrivacyView' %}">Privacy Policy</a></span>
+							</div>		
+						</div>
+						
+						<div class="widget rounded">
+							<div class="widget-about data-bg-image text-center">
+								<img src="{% static 'images/logo.png' %}" alt="logo" class="mb-4" />
+								<p class="mb-4">Hello, We’re content writer who is fascinated by content fashion, celebrity and lifestyle. We helps clients bring the right content to the right people.</p>
+								<ul class="social-icons list-unstyled list-inline mb-0">
+									<li class="list-inline-item"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+									<li class="list-inline-item"><a href="#"><i class="fab fa-twitter"></i></a></li>
+									<li class="list-inline-item"><a href="#"><i class="fab fa-instagram"></i></a></li>
+									<li class="list-inline-item"><a href="#"><i class="fab fa-pinterest"></i></a></li>
+									<li class="list-inline-item"><a href="#"><i class="fab fa-medium"></i></a></li>
+									<li class="list-inline-item"><a href="#"><i class="fab fa-youtube"></i></a></li>
+								</ul>
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+	</section>
+
+	<!-- footer -->
+	<footer>
+		<div class="container-xl">
+			<div class="footer-inner">
+				<div class="row d-flex align-items-center gy-4">
+					<!-- copyright text -->
+					<div class="col-md-4">
+						<span class="copyright">© 2023 BakBakBytes.</span>
+					</div>
+
+					<!-- social icons -->
+					<div class="col-md-4 text-center">
+						<ul class="social-icons list-unstyled list-inline mb-0">
+							<li class="list-inline-item"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+							<li class="list-inline-item"><a href="#"><i class="fab fa-twitter"></i></a></li>
+							<li class="list-inline-item"><a href="#"><i class="fab fa-instagram"></i></a></li>
+							<li class="list-inline-item"><a href="#"><i class="fab fa-pinterest"></i></a></li>
+							<li class="list-inline-item"><a href="#"><i class="fab fa-medium"></i></a></li>
+							<li class="list-inline-item"><a href="#"><i class="fab fa-youtube"></i></a></li>
+						</ul>
+					</div>
+
+					<!-- go to top button -->
+					<div class="col-md-4">
+						<a href="#" id="return-to-top" class="float-md-end"><i class="icon-arrow-up"></i>Back to Top</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+</div><!-- end site wrapper -->
+
+<!-- search popup area -->
+<div class="search-popup">
+	<!-- close button -->
+	<button type="button" class="btn-close" aria-label="Close"></button>
+	<!-- content -->
+	<div class="search-content">
+		<div class="text-center">
+			<h3 class="mb-4 mt-0">Press ESC to close</h3>
+		</div>
+		<!-- form -->
+		<form class="d-flex search-form" method="post" action="{% url 'SearchView' %}">
+
+			{% csrf_token %}
+			<input class="form-control me-2" type="search" placeholder="Search and press enter ..." aria-label="Search" name="search">
+			<button class="btn btn-default btn-lg" type="submit"><i class="icon-magnifier"></i></button>
+		</form>
+	</div>
+</div>
+
+<!-- canvas menu -->
+<div class="canvas-menu d-flex align-items-end flex-column">
+	<!-- close button -->
+	<button type="button" class="btn-close" aria-label="Close"></button>
+
+	<!-- logo -->
+	<div class="logo">
+		<img src="{% static 'images/logo.png' %}" alt="Katen" />
+	</div>
+
+	<!-- menu -->
+	<nav>
+		<ul class="vertical-menu">
+			<li class="active">
+				<a href="#">Home</a>
+			</li>
+			<li><a href="{% url 'CategoryView' slug='trending' %}">Trending</a></li>
+			<li><a href="{% url 'CategoryView' slug='cinema' %}">Cinema</a></li>
+			<li><a href="{% url 'CategoryView' slug='lifestyle' %}">Lifestyle</a></li>
+
+			<li><a href="{% url 'ContactView' %}">Contact</a></li>
+		</ul>
+	</nav>
+
+	<!-- social icons -->
+	<ul class="social-icons list-unstyled list-inline mb-0 mt-auto w-100">
+		<li class="list-inline-item"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+		<li class="list-inline-item"><a href="#"><i class="fab fa-twitter"></i></a></li>
+		<li class="list-inline-item"><a href="#"><i class="fab fa-instagram"></i></a></li>
+		<li class="list-inline-item"><a href="#"><i class="fab fa-pinterest"></i></a></li>
+		<li class="list-inline-item"><a href="#"><i class="fab fa-medium"></i></a></li>
+		<li class="list-inline-item"><a href="#"><i class="fab fa-youtube"></i></a></li>
+	</ul>
+</div>
+
+<!-- JAVA SCRIPTS -->
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/popper.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/slick.min.js' %}"></script>
+<script src="{% static 'js/jquery.sticky-sidebar.min.js' %}"></script>
+<script src="{% static 'js/custom.js' %}"></script>
+
+</body>
+</html>
