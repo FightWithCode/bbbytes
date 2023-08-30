@@ -1,4 +1,4 @@
-blog/migrations/
+blogs/migrations/
 bbbytes/migrations/
 pages/migrations/
 blogs/__pycache__/

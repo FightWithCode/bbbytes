@@ -26,66 +26,65 @@
 
         <!-- header -->
         <header class="header-default">
-			<nav class="navbar navbar-expand-lg">
-				<div class="container-xl">
-					<!-- site logo -->
-					<a class="navbar-brand" href="{% url 'IndexView' %}"><img src="{% static 'images/logo.png' %}"
-							width="100%" alt="logo" /></a>
+            <nav class="navbar navbar-expand-lg">
+                <div class="container-xl">
+                    <!-- site logo -->
+                    <a class="navbar-brand" href="{% url 'IndexView' %}"><img src="{% static 'images/logo.png' %}" width="100%" alt="logo" /></a>
 
-					<div class="collapse navbar-collapse">
-						<!-- menus -->
-						<ul class="navbar-nav mr-auto">
-							<li class="nav-item dropdown active">
-								<a class="nav-link" href="{% url 'IndexView' %}">Home</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="{% url 'CategoryView' slug='trending' %}">Trending</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="{% url 'CategoryView' slug='cinema' %}">Cinema</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="{% url 'CategoryView' slug='lifestyle' %}">Lifestyle</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="{% url 'CategoryView' slug='sports' %}">Sports</a>
-							</li>
-						</ul>
-					</div>
+                    <div class="collapse navbar-collapse">
+                        <!-- menus -->
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item dropdown active">
+                                <a class="nav-link" href="{% url 'IndexView' %}">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'CategoryView' slug='trending' %}">Trending</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'CategoryView' slug='cinema' %}">Cinema</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'CategoryView' slug='lifestyle' %}">Lifestyle</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'CategoryView' slug='sports' %}">Sports</a>
+                            </li>
+                        </ul>
+                    </div>
 
-					<!-- header right section -->
-					<div class="header-right">
-						<!-- social icons -->
-						<ul class="social-icons list-unstyled list-inline mb-0">
-							<li class="list-inline-item">
-								<a href="#"><i class="fab fa-facebook-f"></i></a>
-							</li>
-							<li class="list-inline-item">
-								<a href="#"><i class="fab fa-twitter"></i></a>
-							</li>
-							<li class="list-inline-item">
-								<a href="#"><i class="fab fa-instagram"></i></a>
-							</li>
-							<li class="list-inline-item">
-								<a href="#"><i class="fab fa-pinterest"></i></a>
-							</li>
-							<li class="list-inline-item">
-								<a href="#"><i class="fab fa-youtube"></i></a>
-							</li>
-						</ul>
-						<!-- header buttons -->
-						<div class="header-buttons">
-							<button class="search icon-button">
-								<i class="icon-magnifier"></i>
-							</button>
-							<button class="burger-menu icon-button">
-								<span class="burger-icon"></span>
-							</button>
-						</div>
-					</div>
-				</div>
-			</nav>
-		</header>
+                    <!-- header right section -->
+                    <div class="header-right">
+                        <!-- social icons -->
+                        <ul class="social-icons list-unstyled list-inline mb-0">
+                            <li class="list-inline-item">
+                                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#"><i class="fab fa-instagram"></i></a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#"><i class="fab fa-pinterest"></i></a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#"><i class="fab fa-youtube"></i></a>
+                            </li>
+                        </ul>
+                        <!-- header buttons -->
+                        <div class="header-buttons">
+                            <button class="search icon-button">
+                                <i class="icon-magnifier"></i>
+                            </button>
+                            <button class="burger-menu icon-button">
+                                <span class="burger-icon"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
 
         <!-- page header -->
         <section class="page-header">
@@ -110,7 +109,7 @@
         <section class="main-content">
             <div class="container-xl">
                 <div class="row" style="justify-content:center">
-                    
+
                     <div class="col-md-4">
                         <!-- contact info item -->
                         <div class="contact-item bordered rounded d-flex align-items-center">
@@ -199,7 +198,7 @@
                         <div class="col-md-4">
                             <span class="copyright">
                                 All content © 2023
-                                <a href="https://www.bakbakbytes.com" class="highlight_link">BakBakBytes</a>. All rights
+                                <a href="{% url 'IndexView' %}" class="highlight_link">BakBakBytes</a>. All rights
                                 reserved.
                             </span>
                         </div>
@@ -244,12 +243,13 @@
                 <h3 class="mb-4 mt-0">Press ESC to close</h3>
             </div>
             <!-- form -->
-            <form class="d-flex search-form">
+            <form class="d-flex search-form" method="post" action="{% url 'SearchView' %}">
+
+                {% csrf_token %}
                 <input class="form-control me-2" type="search" placeholder="Search and press enter ..."
-                    aria-label="Search" />
-                <button class="btn btn-default btn-lg" type="submit">
-                    <i class="icon-magnifier"></i>
-                </button>
+                    aria-label="Search" name="search">
+
+                <button class="btn btn-default btn-lg" type="submit"><i class="icon-magnifier"></i></button>
             </form>
         </div>
     </div>
@@ -261,54 +261,34 @@
 
         <!-- logo -->
         <div class="logo">
-            <img src="images/logo.svg" alt="bakbakbytes" />
+            <img src="{% static 'images/logo.png' %}" alt="Katen" />
         </div>
 
         <!-- menu -->
         <nav>
             <ul class="vertical-menu">
                 <li class="active">
-                    <a href="index.html">Home</a>
-                    <ul class="submenu">
-                        <li><a href="index.html">Magazine</a></li>
-                        <li><a href="personal.html">Personal</a></li>
-                        <li><a href="personal-alt.html">Personal Alt</a></li>
-                        <li><a href="minimal.html">Minimal</a></li>
-                        <li><a href="classic.html">Classic</a></li>
-                    </ul>
+                    <a href="#">Home</a>
                 </li>
-                <li><a href="category.html">Lifestyle</a></li>
-                <li><a href="category.html">Inspiration</a></li>
-                <li>
-                    <a href="#">Pages</a>
-                    <ul class="submenu">
-                        <li><a href="category.html">Category</a></li>
-                        <li><a href="blog-single.html">Blog Single</a></li>
-                        <li><a href="blog-single-alt.html">Blog Single Alt</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="{% url 'CategoryView' slug='trending' %}">Trending</a></li>
+                <li><a href="{% url 'CategoryView' slug='cinema' %}">Cinema</a></li>
+                <li><a href="{% url 'CategoryView' slug='lifestyle' %}">Lifestyle</a></li>
+
+                <li><a href="{% url 'ContactView' %}">Contact</a></li>
             </ul>
         </nav>
 
         <!-- social icons -->
         <ul class="social-icons list-unstyled list-inline mb-0 mt-auto w-100">
-            <li class="list-inline-item">
-                <a href="#" rel="nofollow"> <i class="fab fa-facebook-f"></i></a>
-            </li>
-            <li class="list-inline-item">
-                <a href="#" rel="nofollow"> <i class="fab fa-twitter"></i></a>
-            </li>
-            <li class="list-inline-item">
-                <a href="#" rel="nofollow"> <i class="fab fa-instagram"></i></a>
-            </li>
-            <li class="list-inline-item">
-                <a href="#" rel="nofollow"> <i class="fab fa-pinterest"></i></a>
-            </li>
+            <li class="list-inline-item"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+            <li class="list-inline-item"><a href="#"><i class="fab fa-twitter"></i></a></li>
+            <li class="list-inline-item"><a href="#"><i class="fab fa-instagram"></i></a></li>
+            <li class="list-inline-item"><a href="#"><i class="fab fa-pinterest"></i></a></li>
+            <li class="list-inline-item"><a href="#"><i class="fab fa-medium"></i></a></li>
+            <li class="list-inline-item"><a href="#"><i class="fab fa-youtube"></i></a></li>
         </ul>
     </div>
+
 
     <!-- JAVA SCRIPTS -->
     <script src="{% static 'js/jquery.min.js' %}"></script>
