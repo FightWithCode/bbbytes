@@ -1,5 +1,6 @@
 blogs/migrations/
 bbbytes/migrations/
+bbbytes/local.py
 pages/migrations/
 blogs/__pycache__/
 pages/__pycache__/
@@ -8,7 +9,8 @@ ProductionFiles/
 .env
 env/
 *.pyc
-
+*/local.py
+local.py
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
