@@ -151,3 +151,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # 'C:\Users\Akash Kumar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\Scripts
+
+# Command: 
+# from BBBytes directory
+# cd env/Scripts
+# activate
+# cd ../../
+# cd bbbytes
+# python manage.py runserver --settings bbbytes.local
