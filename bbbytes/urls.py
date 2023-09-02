@@ -15,7 +15,7 @@ Including another pathconf
     2. Add a path to pathpatterns:  path('blog/', include('blog.paths'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from django.contrib.sitemaps.views import sitemap
 from django.conf import settings
 from django.conf.urls.static import static
@@ -46,6 +46,7 @@ urlpatterns = [
     path('contact/', PagesView.ContactView, name="ContactView"),
     path('thankyou/', PagesView.SubmitThankView, name="SubmitThankView"),
     path('category/<str:slug>/', PagesView.CategoryView, name='CategoryView'),
+    # re_path(r'^ckeditor/', include('ckeditor_uploader.urls')),
 ]
 
 # if settings.DEBUG:

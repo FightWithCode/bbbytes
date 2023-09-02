@@ -2,6 +2,7 @@ from django.db import models
 from django.urls import reverse
 import random, string
 from django.template.defaultfilters import slugify
+from ckeditor.fields import RichTextField
 
 
 def default_list():
@@ -67,7 +68,7 @@ class Blog(models.Model):
 	front_image_500 = models.ImageField(upload_to='blogs', default='blogs/default.png')
 	
 	description = models.CharField(max_length=500)
-	content = models.TextField()
+	content = RichTextField()
 	author = models.ForeignKey(Author, default=None, null=True, blank=True, on_delete=models.SET_NULL)
 	
 	tags = models.JSONField(default=default_list, null=True, blank=True)
