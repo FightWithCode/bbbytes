@@ -299,7 +299,7 @@
                     <a href="{% url 'BlogDetailView' slug=i.slug %}"
                       ><h1 class="tag language-selector">{{i.language}}</h1></a
                     >
-                    {% endfor %} {% else %}
+                    {% else %}
                     <h1 class="tag language-selector">
                       <a href="#">{{blog.language}}</a>
                     </h1>
