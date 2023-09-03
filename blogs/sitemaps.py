@@ -7,7 +7,7 @@ class BlogSitemap(Sitemap):
     priority = 0.9
  
     def items(self):
-        return Blog.objects.filter(public=True).order_by('-date')
+        return Blog.objects.filter(public=True).order_by('-created')
  
     def lastmod(self, obj):
-    	return obj.date
+    	return obj.created

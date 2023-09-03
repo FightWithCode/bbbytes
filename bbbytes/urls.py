@@ -24,10 +24,15 @@ from blogs.sitemaps import BlogSitemap
 
 from pages import views as PagesView
 
+from django.contrib.sitemaps.views import sitemap
+from blogs.sitemaps import BlogSitemap
+from pages.sitemaps import PageSitemap
+
 
 
 sitemaps = {
-    'blogs': BlogSitemap
+    'blogs': BlogSitemap,
+    'pages': PageSitemap
 }
 
 urlpatterns = [
