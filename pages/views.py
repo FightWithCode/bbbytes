@@ -50,7 +50,7 @@ def PrivacyView(request):
 
 
 def BlogView(request):
-	obj = Blog.objects.filter(public=True).order_by('-id')
+	obj = Blog.objects.filter(public=True).filter(category__name__in=["Cinema", "Fashion", "Lifestyle"]).order_by('-id')
 	return render(request, 'blog.html', {'blogs': obj})
 
 
